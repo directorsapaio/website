@@ -8,7 +8,7 @@ export const siteConfig = {
   phoneDisplay: "+91 84462 25973",
   email: "director.sapaio@gmail.com",
   address:
-    "Flat No. 8, Raj Palace, Plot 12, Survey No. 10, Ashoka, Dwarka Corner, Nashik 422011, Maharashtra, India",
+    "Raj Palace, Plot 12, Survey No. 10, Ashoka, Dwarka Corner, Nashik 422011, Maharashtra, India",
 };
 
 export const primaryNavigation = [
