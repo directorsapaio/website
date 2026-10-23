@@ -78,8 +78,15 @@ try {
   await Promise.all([waitFor(site), waitFor("http://127.0.0.1:" + debugPort + "/json/version")]);
   const errors = [];
 
-  const sitemap = await fetch(site + "/sitemap.xml").then((response) => response.text());
+  const sitemapResponse = await fetch(site + "/sitemap.xml");
+  const sitemap = await sitemapResponse.text();
+  if (!sitemapResponse.headers.get("content-type")?.includes("xml")) errors.push("Sitemap did not return an XML content type.");
+  if (!sitemap.includes("xmlns:image=") || !sitemap.includes("<image:loc>")) errors.push("Sitemap did not include image sitemap entries.");
   const publicRoutes = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map((match) => new URL(match[1]).pathname);
+  const robots = await fetch(site + "/robots.txt").then((response) => response.text());
+  if (!robots.includes("Sitemap: https://sapaio.in/sitemap.xml") || !robots.includes("Host: https://sapaio.in")) errors.push("robots.txt did not advertise the production host and XML sitemap.");
+  const homepage = await fetch(site).then((response) => response.text());
+  if (!homepage.includes('type="application/ld+json"') || !homepage.includes('"@type":"Organization"')) errors.push("Homepage did not include Organization structured data.");
   for (const route of publicRoutes) {
     const response = await fetch(site + route);
     if (!response.ok) errors.push(route + " returned " + response.status + ".");

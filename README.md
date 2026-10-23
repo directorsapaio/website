@@ -18,9 +18,19 @@ Use `npm run typecheck`, `npm run lint`, and `npm run build` before release.
 - Public service status: `src/config/services.ts`
 - Industry content and photography: `src/config/industries.ts`
 
-The real SIF logo has not been supplied yet. Add it under `public`, then set `logoPath` in `src/config/site.ts`. Do not replace the current text lockup with an unapproved mark.
+The approved logo is configured from `public/Logo SIF.png` through `src/config/assets.ts`.
 
 Services with `requires_confirmation` status are excluded from navigation, static page generation and the sitemap.
+
+## Search indexing
+
+Set `NEXT_PUBLIC_SITE_URL` to the final HTTPS domain before building. The application publishes:
+
+- `/sitemap.xml` with every public service and sector page plus relevant image references.
+- `/robots.txt` with the production host and sitemap location.
+- Organisation structured data in the root layout.
+
+After deployment, verify the domain in Google Search Console and submit `https://your-domain.example/sitemap.xml`. Search engines decide indexing and ranking; sitemap submission does not guarantee a particular position.
 
 ## Enquiry delivery
 

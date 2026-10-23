@@ -23,10 +23,31 @@ export const metadata: Metadata = {
   },
 };
 
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: siteConfig.name,
+  alternateName: siteConfig.shortName,
+  url: siteConfig.url,
+  logo: new URL(assets.logo, siteConfig.url).toString(),
+  description: siteConfig.description,
+  telephone: siteConfig.phoneDisplay,
+  email: siteConfig.email,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Flat No. 8, Raj Palace, Plot 12, Survey No. 10, Ashoka, Dwarka Corner",
+    addressLocality: "Nashik",
+    addressRegion: "Maharashtra",
+    postalCode: "422011",
+    addressCountry: "IN",
+  },
+};
+
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en-IN">
       <body>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
         <a className="skip-link" href="#main-content">Skip to content</a>
         <SiteHeader />
         <main id="main-content">{children}</main>
