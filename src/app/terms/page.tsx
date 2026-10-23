@@ -1,0 +1,8 @@
+import type { Metadata } from "next";
+import { Breadcrumbs } from "@/components/breadcrumbs";
+
+export const metadata: Metadata = { title: "Terms of Use", description: "Terms governing use of the SIF website." };
+
+export default function TermsPage() {
+  return <section className="legal-page section"><div className="shell legal-shell"><Breadcrumbs items={[{ label: "Terms" }]} /><h1>Terms of use</h1><p className="lead">General terms for information presented on this website.</p><h2>Website information</h2><p>The website provides general information about SIF and its currently published services. It does not create a service agreement, employment offer, partnership or guarantee of availability.</p><h2>Service scope</h2><p>Any engagement is subject to site assessment where applicable, written commercial terms and an agreed scope. Industry pages describe potential applications and do not represent existing clients, completed contracts or specialist approvals.</p><h2>Accuracy and updates</h2><p>SIF may update service descriptions and website information as the business develops. Material decisions should rely on a current written proposal or agreement, not website content alone.</p><h2>Images</h2><p>Photography illustrates relevant facility environments and service contexts. It does not identify or imply an SIF customer relationship with any pictured location.</p><h2>External contact</h2><p>Email and telephone links open services provided by the visitor&apos;s device or communications provider. Their terms may apply.</p><p className="legal-updated">Last updated: 22 October 2026</p></div></section>;
+}
