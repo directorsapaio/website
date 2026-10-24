@@ -84,7 +84,7 @@ try {
   if (!sitemap.includes("xmlns:image=") || !sitemap.includes("<image:loc>")) errors.push("Sitemap did not include image sitemap entries.");
   const publicRoutes = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map((match) => new URL(match[1]).pathname);
   const robots = await fetch(site + "/robots.txt").then((response) => response.text());
-  if (!robots.includes("Sitemap: https://sapaio.in/sitemap.xml") || !robots.includes("Host: https://sapaio.in")) errors.push("robots.txt did not advertise the production host and XML sitemap.");
+  if (!robots.includes("Sitemap: https://sapaioifm.com/sitemap.xml") || !robots.includes("Host: https://sapaioifm.com")) errors.push("robots.txt did not advertise the production host and XML sitemap.");
   const homepage = await fetch(site).then((response) => response.text());
   if (!homepage.includes('type="application/ld+json"') || !homepage.includes('"@type":"Organization"')) errors.push("Homepage did not include Organization structured data.");
   for (const route of publicRoutes) {

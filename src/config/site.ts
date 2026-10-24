@@ -3,7 +3,11 @@ export const siteConfig = {
   shortName: "SIF",
   description:
     "Integrated facility management shaped around each site's operations, with confirmed housekeeping, commercial cleaning and industrial cleaning capabilities.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://sapaio.in",
+  url:
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    (process.env.VERCEL_PROJECT_PRODUCTION_URL
+      ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+      : "https://sapaioifm.com"),
   phone: "8446225973",
   phoneDisplay: "+91 84462 25973",
   email: "director.sapaio@gmail.com",
