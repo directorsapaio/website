@@ -53,21 +53,21 @@ export function EnquiryForm() {
   return (
     <form className="enquiry-form" noValidate onSubmit={submit}>
       <div className="form-grid">
-        <label><span>Name</span><input name="name" autoComplete="name" {...errorProps("name")} />{fieldError("name")}</label>
-        <label><span>Company / organisation</span><input name="company" autoComplete="organization" {...errorProps("company")} />{fieldError("company")}</label>
-        <label><span>Work email</span><input name="email" type="email" autoComplete="email" {...errorProps("email")} />{fieldError("email")}</label>
-        <label><span>Phone</span><input name="phone" type="tel" autoComplete="tel" {...errorProps("phone")} />{fieldError("phone")}</label>
+        <label><span>Name</span><input name="name" autoComplete="name" maxLength={500} {...errorProps("name")} />{fieldError("name")}</label>
+        <label><span>Company / organisation</span><input name="company" autoComplete="organization" maxLength={500} {...errorProps("company")} />{fieldError("company")}</label>
+        <label><span>Work email</span><input name="email" type="email" autoComplete="email" maxLength={500} {...errorProps("email")} />{fieldError("email")}</label>
+        <label><span>Phone</span><input name="phone" type="tel" autoComplete="tel" maxLength={20} {...errorProps("phone")} />{fieldError("phone")}</label>
         <label><span>Industry</span><select name="industry" defaultValue="" {...errorProps("industry")}><option value="" disabled>Select an industry group</option>{industryFamilies.map((family) => <option key={family}>{family}</option>)}<option>Other</option></select>{fieldError("industry")}</label>
         <label><span>Service of interest</span><select name="service" defaultValue="" {...errorProps("service")}><option value="" disabled>Select a confirmed service</option>{activeServices.map((service) => <option key={service.slug} value={service.shortTitle}>{service.shortTitle}</option>)}<option>Not sure — discuss my requirement</option></select>{fieldError("service")}</label>
-        <label className="form-span"><span>City / location</span><input name="location" autoComplete="address-level2" {...errorProps("location")} />{fieldError("location")}</label>
-        <label className="form-span"><span>Approximate facility or workforce requirement <small>Optional</small></span><input name="requirement" placeholder="For example: office size, number of locations or shift pattern" /></label>
-        <label className="form-span"><span>Message</span><textarea name="message" rows={6} placeholder="Tell us about the facility, work areas, operating hours and priorities." {...errorProps("message")} />{fieldError("message")}</label>
+        <label className="form-span"><span>City / location</span><input name="location" autoComplete="address-level2" maxLength={500} {...errorProps("location")} />{fieldError("location")}</label>
+        <label className="form-span"><span>Approximate facility or workforce requirement <small>Optional</small></span><input name="requirement" maxLength={500} placeholder="For example: office size, number of locations or shift pattern" /></label>
+        <label className="form-span"><span>Message</span><textarea name="message" rows={6} maxLength={4000} placeholder="Tell us about the facility, work areas, operating hours and priorities." {...errorProps("message")} />{fieldError("message")}</label>
         <label className="privacy-check form-span"><input name="privacy" type="checkbox" {...errorProps("privacy")} /><span>I agree that SIF may use these details to respond to my enquiry. I have read the <a href="/privacy">privacy policy</a>.</span>{fieldError("privacy")}</label>
         <label className="honeypot" aria-hidden="true">Leave empty<input name="website" tabIndex={-1} autoComplete="off" /></label>
       </div>
       <div className="form-submit">
         <button className="button" type="submit" disabled={status.kind === "loading"}>{status.kind === "loading" ? <><LoaderCircle className="spin" />Checking form</> : <>Send enquiry <ArrowRight /></>}</button>
-        <p>Online delivery is not connected yet. You can always email <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>.</p>
+        <p>Use this form or email <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a> directly.</p>
       </div>
       {status.kind !== "idle" && status.kind !== "loading" && <div className={`form-status form-status--${status.kind}`} role={status.kind === "error" ? "alert" : "status"}>{status.kind === "success" ? <CheckCircle2 /> : <TriangleAlert />}<p>{status.message}</p></div>}
     </form>
